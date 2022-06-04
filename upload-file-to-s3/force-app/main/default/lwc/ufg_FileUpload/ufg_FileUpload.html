@@ -1,0 +1,30 @@
+<template>
+    <lightning-card title="Datatable styling in lwc">
+        <lightning-spinner if:true={isLoading} alternative-text="Loading" size="small"></lightning-spinner>
+        <div class="slds-m-around_small">
+            <lightning-input label="" name="file uploader" onchange={handleFilesChange} type="file" multiple></lightning-input>
+        </div>
+        <div class="slds-m-around_small">
+            <template if:true={fileName}>
+                {fileName} &nbsp; &nbsp; {fileSize}
+            </template>
+        </div>
+        <div class="slds-m-around_small">
+            <lightning-button variant="success" label="Upload" title="Upload" onclick={saveFile}></lightning-button>
+        </div>
+        
+        <div>
+        <template if:true={tableData}>
+            <div class="slds-p-around_medium">
+                <lightning-datatable class="slds-item"
+                key-field="Id"
+                data={tableData}
+                columns={columns}
+                hide-checkbox-column
+                ></lightning-datatable>
+            </div>
+        </template>
+       </div>
+       
+    </lightning-card>
+</template>

@@ -1,0 +1,27 @@
+<template>
+    <lightning-card>
+    <lightning-tabset>
+        <lightning-tab label="Item One">
+            One Content !
+            <c-file-upload-l-w-c class="slds-align_absolute-center" 
+                                source="lwc/fileUploadLWC" 
+                                appid={recordid}>
+                Get the records for a list view using @wire.
+            </c-file-upload-l-w-c>
+        </lightning-tab>
+        <lightning-tab label="Item Two">
+            Two Content !
+        </lightning-tab>
+        <lightning-tab label="Item Three">
+            Three Content !
+        </lightning-tab>
+        <template if:true={showTabFour}>
+            <lightning-tab label="Item Four">
+                Four Content !
+            </lightning-tab>
+        </template>
+    </lightning-tabset>
+
+    <lightning-button label="Toggle Optional Tab" onclick={toggleOptionalTab} ></lightning-button>
+</lightning-card>
+</template>

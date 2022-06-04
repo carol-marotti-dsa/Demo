@@ -1,0 +1,64 @@
+<template>
+   
+    <!-- file upload section -->
+    <lightning-card variant="Narrow" title="Lightning Web Component File Uploader for AWS" >
+         <!--   style="width:30rem"    icon-name="custom:custom14"> 
+        <div style="margin-left:5%">-->
+        <div>
+            <div class="slds-p-left_medium">
+                <lightning-input label="" name="file to uploder" onchange={handleSelectedFiles} 
+                    type="file" multiple></lightning-input>
+            </div>
+            <div class="slds-text-body_small slds-p-left_medium">{fileName}
+            <template if:true={showSpinner}>
+                <lightning-spinner alternative-text="Uploading the file......" size="medium">                        
+                    </lightning-spinner>
+            </template>
+            </div><br/>
+            <div class="slds-p-left_medium">
+                <lightning-button class="slds-m-top--medium" label="Store File to AWS" onclick={handleFileUpload} 
+                    variant="brand">
+                </lightning-button>
+            </div>
+        </div>
+        <!--displaying uploaded files-->
+        <!--
+        <template if:true={tableData}>
+            <lightning-card title="Following files uploaded:">
+                <div style="width: auto;">                    
+                    <ul class="slds-m-around_small">
+                        <template for:each={tableData} for:item="attachment">
+                            <li key={attachment.Id}>
+                                {attachment.File_Name__c}, 
+                                <lightning-formatted-url value={attachment.FileURL__c} target="_blank">{attachment.FileURL__c}</lightning-formatted-url>
+                            </li>
+                        </template>
+                    </ul>                    
+                </div>
+        </lightning-card>
+        </template>
+        -->
+        <!--
+        <lightning-record-form
+            record-id={getIdFromParent}
+            object-api-name={objectApiName}
+            layout-type="Full"
+            mode="view"
+        >
+        </lightning-record-form>
+        -->
+        <!--Display File List-->
+      <!--<template if:true={tableData}>-->
+        <div class="MyTable slds-p-around_medium">
+            <lightning-datatable class="slds-item"
+                key-field="Id"
+                data={tableData}
+                columns={columns}
+                hide-checkbox-column
+            ></lightning-datatable>
+        </div>
+        <!--</template>-->
+    </lightning-card>
+    <!---->
+
+</template>
