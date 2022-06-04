@@ -1,0 +1,24 @@
+<template>
+
+        <lightning-card title="Start Application" icon-name="custom:custom14">
+            <div class="slds-var-m-around_medium">
+                <lightning-input 
+                    type="file" 
+                    accept={acceptedFormats}
+                    label="Document" 
+                    record-id={recordId}
+                    onchange={openfileUpload}>
+                </lightning-input>
+            </div>
+            <template if:true={fileData}>
+                <p>{fileData.filename}</p>
+            </template>
+            <lightning-button 
+                variant="brand" 
+                label="submit" 
+                title="Submit" 
+                onclick={handleClick} 
+                class="slds-var-m-*_x-small">
+            </lightning-button>
+        </lightning-card>
+</template>
