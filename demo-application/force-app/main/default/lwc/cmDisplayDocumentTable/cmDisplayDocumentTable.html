@@ -1,0 +1,16 @@
+<template>
+    <lightning-card title="Document List">
+  
+        <!--<template if:true={tableData}>-->
+            <div>
+                <lightning-datatable
+                    key-field="Id"
+                    data={documentData}
+                    columns={columns}
+                    hide-checkbox-column
+                    ></lightning-datatable>
+            </div>
+      <!--  </template>-->
+       
+    </lightning-card>
+</template>

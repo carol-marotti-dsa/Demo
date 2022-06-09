@@ -1,24 +1,53 @@
 <template>
 
-        <lightning-card title="Start Application" icon-name="custom:custom14">
-            <div class="slds-var-m-around_medium">
+        <lightning-card title="Start by uploading a Loan File" icon-name="custom:custom14">
+            <lightning-layout-item
+                class="slds-var-m-around_medium">
+
                 <lightning-input 
                     type="file" 
                     accept={acceptedFormats}
-                    label="Document" 
+                    label="" 
                     record-id={recordId}
-                    onchange={openfileUpload}>
+                    onchange={handleSelectedFiles}>
                 </lightning-input>
-            </div>
-            <template if:true={fileData}>
+
+            </lightning-layout-item>
+
+            <lightning-layout-item class="slds-text-body_small slds-var-p-left_medium">{fileName}
+                <template if:true={showSpinner}>
+
+                    <lightning-spinner alternative-text="Uploading the file......" size="medium">                        
+                    </lightning-spinner>
+
+                </template>
+
+            </lightning-layout-item><br/>
+            <!--<template if:true={fileData}>
                 <p>{fileData.filename}</p>
             </template>
-            <lightning-button 
-                variant="brand" 
-                label="submit" 
-                title="Submit" 
-                onclick={handleClick} 
-                class="slds-var-m-*_x-small">
-            </lightning-button>
+        -->
+            <lightning-layout-item>
+                <lightning-button 
+                    variant="brand" 
+                    label="Upload" 
+                    title="Upload" 
+                    onclick={handleFileUpload} 
+                    class="slds-var-m-left_x-small">
+                </lightning-button>
+            </lightning-layout-item>
+
+<!--
+            <lightning-layout-item>
+
+                <c-cm-display-Document-table 
+                    class="slds-align_absolute-center" 
+                    source="lwc/cmDisplayDocumentTable" 
+                    appid={recordid}>
+                    Get the records for a list view using @wire.
+                </c-cm-display-Document-table>
+
+         </lightning-layout-item>
+-->
         </lightning-card>
 </template>
