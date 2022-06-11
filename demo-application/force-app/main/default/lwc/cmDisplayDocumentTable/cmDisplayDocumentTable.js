@@ -5,7 +5,6 @@ import getDocumentsbyApp from '@salesforce/apex/cm_documentController.getDocumen
 import { subscribe, MessageContext } from 'lightning/messageService';
 import FILE_UPLOADED_CHANNEL from '@salesforce/messageChannel/File_Uploaded__c';
 import { refreshApex } from '@salesforce/apex';
-import { getRecordNotificationChange } from 'lightning/uiRecordApi';
 
 import {ShowToastEvent} from 'lightning/platformShowToastEvent';
 const COLUMNS = [
