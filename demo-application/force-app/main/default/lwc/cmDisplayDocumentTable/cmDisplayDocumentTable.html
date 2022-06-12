@@ -1,16 +1,19 @@
 <template>
-    <lightning-card title="Document List">
+  <!--  <lightning-card title="Document List">-->
   
         <!--<template if:true={tableData}>-->
-            <div>
-                <lightning-datatable
+            <div class={flexipageRegionWidth}>
+                <lightning-datatable 
                     key-field="Id"
                     data={documentData}
                     columns={columns}
                     hide-checkbox-column
                     ></lightning-datatable>
-            </div>
+             </div>
+             <div>
+                 
+             </div>
       <!--  </template>-->
        
-    </lightning-card>
+    <!--</lightning-card>-->
 </template>

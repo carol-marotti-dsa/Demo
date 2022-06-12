@@ -108,9 +108,9 @@ export default class FileUploaderCompLwc extends LightningElement {
             console.log('Upload result = ' +result);            
             console.log('ApplicationId = ' + this.recordId);            
             this.fileName = this.fileName + ' - Uploaded Successfully';
-            this.refreshRelatedView();
+            //this.refreshRelatedView();
             //call to show uploaded files
-            this.updateRecordView();
+            //this.updateRecordView();
             this.showSpinner = false;
             // Showing Success message after uploading
             this.dispatchEvent(

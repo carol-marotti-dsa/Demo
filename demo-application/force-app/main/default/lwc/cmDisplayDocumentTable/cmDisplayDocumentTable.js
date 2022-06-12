@@ -13,8 +13,9 @@ const COLUMNS = [
     {label:'Application Id', fieldName:'Application__c'},
     {label:'Upload Date', fieldName:'CreatedDate'},
 ]
-export default class cm_display_document_table extends LightningElement {
+export default class cmDisplayDocumentTable extends LightningElement {
 @api recordId; //get the recordId for which files will be attached.
+//@api flexipageRegionWidth;
 documentData; //to display the uploaded file and link to AWS
 error;
 subscription = null;
@@ -55,7 +56,7 @@ documentsHandler(value){
         }
         this.documentData = rows;
 
-        console.log('Document List Records: ' + this.documentData)
+        console.log('Document List Records: ' + JSON.stringify(this.documentData));
     }
     if(error){
         console.error(error)
@@ -83,5 +84,9 @@ documentsHandler(value){
   }
   connectedCallback() {
     this.subscribeToMessageChannel();
+  }
+  @api
+  refresh() {
+    //return refreshApex(this.documentData);
   }
 }

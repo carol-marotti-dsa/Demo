@@ -1,0 +1,30 @@
+<template>
+    <lightning-card>
+    <lightning-tabset>
+        <lightning-tab label="One">
+            <c-cm-upload-loan-file 
+                class=""
+                record-id={recordId}>
+            </c-cm-upload-loan-file>
+            <c-cm-display-document-table 
+                class="slds-align_absolute-center"
+                record-id={recordId}>
+            </c-cm-display-document-table >
+            <lightning-layout-item>
+                <lightning-button 
+                    variant="brand" 
+                    label="Next" 
+                    title="Next" 
+                    onclick={handleNext} 
+                    class="slds-var-m-left_x-small">
+                </lightning-button>
+            </lightning-layout-item>
+        </lightning-tab>
+
+        <lightning-tab label="Two">
+            This is tab #2
+        </lightning-tab>
+
+    </lightning-tabset>
+</lightning-card>
+</template>
