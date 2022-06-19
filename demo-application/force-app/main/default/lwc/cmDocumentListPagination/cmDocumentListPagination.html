@@ -1,0 +1,36 @@
+<template>
+    <lightning-card title="Lightning Datatable Simple Pagination Example">
+        <div class="slds-m-around_medium">
+    
+            
+            <lightning-datatable 
+                key-field="id" 
+                data-id="table"
+                data={documentListData}
+                columns={columns}>
+           </lightning-datatable>
+           </br>
+           <lightning-layout horizontal-align="space">
+            <lightning-layout-item flexibility="auto">
+                <lightning-button 
+                    label="Previous" 
+                    icon-name="utility:chevronleft" 
+                    onclick={previousHandler}>
+                </lightning-button>
+            </lightning-layout-item>
+            <lightning-layout-item flexibility="auto">
+                Page {page} of {totalPage}
+            </lightning-layout-item>
+            <lightning-layout-item flexibility="auto">
+                <lightning-button 
+                    label="Next" 
+                    icon-name="utility:chevronright" 
+                    icon-position="right"
+                    onclick={nextHandler}>
+                </lightning-button>
+            </lightning-layout-item>
+        </lightning-layout>
+        </div>
+    </lightning-card>
+
+</template>

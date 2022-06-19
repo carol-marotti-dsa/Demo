@@ -20,6 +20,7 @@ documentData; //to display the uploaded file and link to AWS
 error;
 subscription = null;
 wiredDataResult;
+visibleDocuments;
 
 columns = COLUMNS;
 
@@ -89,4 +90,10 @@ documentsHandler(value){
   refresh() {
     //return refreshApex(this.documentData);
   }
+
+  updateDocumentHandler(event){
+    this.visibleDocuments=[...event.detail.records]
+    console.log(event.detail.records)
+}
+
 }

@@ -1,8 +1,8 @@
 <template>
-  <!--  <lightning-card title="Document List">-->
+    <lightning-card title="Document List">
   
         <!--<template if:true={tableData}>-->
-            <div class={flexipageRegionWidth}>
+            <div >
                 <lightning-datatable 
                     key-field="Id"
                     data={documentData}
@@ -10,10 +10,14 @@
                     hide-checkbox-column
                     ></lightning-datatable>
              </div>
-             <div>
-                 
+
+              <div slot="footer" class="slds-var-m-horizontal_medium">
+                <c-cm-Document-pagination 
+                  records={totalDocuments} 
+                  onupdate={updateDocumentHandler}>
+                </c-cm-Document-pagination>                        
              </div>
       <!--  </template>-->
        
-    <!--</lightning-card>-->
+    </lightning-card>
 </template>
