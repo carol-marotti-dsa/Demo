@@ -1,8 +1,10 @@
 import { LightningElement, wire, api, track} from 'lwc';
 import { refreshApex } from '@salesforce/apex';
 import getDocumentsbyApp from '@salesforce/apex/cm_documentController.getDocumentsbyApp';
+import setPrimaryDocument from '@salesforce/apex/cm_documentController.setPrimaryDocument';
 import { subscribe, MessageContext } from 'lightning/messageService';
 import FILE_UPLOADED_CHANNEL from '@salesforce/messageChannel/File_Uploaded__c';
+import UserPermissionsJigsawProspectingUser from '@salesforce/schema/User.UserPermissionsJigsawProspectingUser';
 
 //const columns = [{
 //        label: 'Name',
@@ -22,15 +24,50 @@ import FILE_UPLOADED_CHANNEL from '@salesforce/messageChannel/File_Uploaded__c';
 //    }
 //];
 
+
 const columns = [
-    {label:'Document Name', fieldName:'Name' },
-    {label:'File Name', fieldName:'File_Name__c' },
-    {label:'Application Name', fieldName:'Application__c'},
-    {label:'Upload Date', fieldName:'CreatedDate'},
+ //   {label:'Select Loan', fieldName:'',
+ //       type: 'text',
+ //       cellAttributes: {
+ //           iconName: {fieldName: 'currentIcon'},
+ //           iconPosition:'right'
+ //           }
+//
+ //       },
+ //       {
+ //           type:"button",
+ //           fixedWidth: 150,
+ //           disabled:"true",
+ //           typeAttributes: {
+ //               label: 'Select',
+ //               name: 'select',
+ //               variant: {fieldName: 'buttonVariant'}
+ //           }
+ //       },  
+    {label:'Document Name', fieldName:'name' },
+    {label:'File Name', fieldName:'fileName' },
+    {label:'Application Name', fieldName:'applicationName'},
+    //{label:'Upload Date', fieldName:'CreatedDate'},
+    {
+        label: "Upload Time",
+        fieldName: "createdDate",
+        type: "date",
+        typeAttributes:{
+            year: "numeric",
+            month: "long",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit"
+        }
+    },
+    {label:'Is Current', fieldName:'is_current'},
 ];
 
 export default class LightningDatatableExample extends LightningElement {
     @api recordId;
+    @api documentId;
+    @api docId;
+
     @track value;
     @track error;
     @track data;
@@ -83,6 +120,32 @@ export default class LightningDatatableExample extends LightningElement {
         const {data, error} = value;  //destructure the provisioned value
         if (data) {
             this.processRecords(data);
+
+            this.documents = data;
+            let documentsList = [];
+
+            //loop through the list of documents and assign an icon based on
+            //the most recent file
+            this.documents.forEach(record => {
+                //copy the details in record object to contactObj object
+                let documentObj = {...record};
+                //if(record.rowNum == '0'){
+                //    documentObj.currentIcon = 'custom:custom1';
+                //    console.log ('Row Number 0 Found');
+                //}
+
+                if(record.is_current == true){
+                    documentObj.currentIcon = 'custom:custom1';
+                    documentObj.buttonVariant = 'brand';
+                    console.log ('Row Number 0 Found');                    
+                }
+                console.log ('Row Number: ' + record.rowNum);
+                documentsList.push(documentObj);
+            });
+            this.selectedRows = this.documentsList[0].id;
+            this.data = documentsList;
+
+   
             this.error = undefined;
         } else if (error) {
             this.error = error;
@@ -150,7 +213,63 @@ export default class LightningDatatableExample extends LightningElement {
         return refreshApex(this.result);
         
     }
-    
+
+    handleRowSelection = event => {
+        var selectedRows=event.detail.selectedRows;
+        var el = this.template.querySelector('lightning-datatable');
+        //console.log('Initial Selected: '+ selectedRows[0].id);
+
+        var selected = el.getSelectedRows();
+        console.log('Selected Record ==> ' + JSON.stringify(selected));
+        console.log('Selected ID ==> ' + selected[0].id);
+
+        //if(selectedRows.length>1)
+        //{
+        //    var el = this.template.querySelector('lightning-datatable');
+//
+        //    selectedRows=el.selectedRows=el.selectedRows.slice(1);
+ //
+  //          event.preventDefault();
+//
+//            return;
+//        }
+    }
+
+ //   handleDocumentSelection (event) {
+ //       const row = event.detail.row;
+ //       this.docId = row.id;
+ //       console.log('Application Id ==> '+ this.recordId);
+ //       console.log('Document Id ==> '+ this.docId);
+//
+//        setPrimaryDocument({appId: this.recordId,
+ //                           docId: this.docId})
+ //           .then(result => {
+ //           console.log('Primary Update Result = ' +result);                      
+ //           })
+ //           .catch(error => {
+ //               // Error to show during upload
+ //               window.console.log(error);
+ //           });
+ //       //setPrimaryDocument(docId);  //4
+      
+ //  }
+    //handleRowSelection = event => {
+    //    var selectedRows=event.detail.selectedRows;
+    //    console.log('Initial Selected: '+ selectedRows[0].Name);
+//
+    //    if(selectedRows.length>1)
+     //   {
+     //       var el = this.template.querySelector('lightning-datatable');
+//
+ //           selectedRows=el.selectedRows=el.selectedRows.slice(1);
+ //
+ //           event.preventDefault();
+ //           console.log('Selected: '+ JSON.stringify(selectedRows[0]));
+ //           return;
+ //       }
+ //   }
+
+    //Below is overridden
     onRowSelection(event){
         if(!this.isPageChanged || this.initialLoad){
             if(this.initialLoad) this.initialLoad = false;

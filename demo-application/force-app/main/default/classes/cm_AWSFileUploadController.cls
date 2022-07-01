@@ -80,7 +80,24 @@ public with sharing class cm_AWSFileUploadController {
         document.Application__c = parentId;
         document.File_URL__c = fileURL;
         document.File_Name__c =  fileName;
-        insert document;                                           
+        document.Is_Current__c = true;
+        insert document;      
+        
+        List<Document_File__c> docsToUpdate = new List<Document_File__c>();
+        boolean firstRecord = true;
+        for (Document_File__c ctx : [SELECT Id, Is_Current__c, CreatedDate FROM Document_File__c ORDER BY CreatedDate DESC ])
+        {
+            if(firstRecord) {
+                ctx.Is_Current__c = true;
+                firstRecord = false;
+            }
+            else {
+                ctx.Is_Current__c = false;
+            }
+            docsToUpdate.add(ctx);
+        }
+        if(docsToUpdate != null && !docsToUpdate.IsEmpty())
+            Database.update(docsToUpdate);
     }
 
 }

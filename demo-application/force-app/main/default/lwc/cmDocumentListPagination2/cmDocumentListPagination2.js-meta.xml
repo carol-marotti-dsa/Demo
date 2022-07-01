@@ -15,12 +15,17 @@
       <targetConfigs>
         <targetConfig targets="lightning__FlowScreen">
             <property name="recordId" type="String" />
+            <property name="documentId" type="String" />
         </targetConfig>
         <targetConfig targets="lightningCommunity__Default">
-            <property name="recordId" 
+                <property name="recordId" 
                 type="String"
                 label="Record ID"
                 description="Input Record Id as a string or use variable {!recordId}" />
+                <property name="documentId" 
+                type="String"
+                label="Document ID"
+                description="Output Record Id as a string or use variable {!documentId}" />
         </targetConfig>
 
     </targetConfigs>

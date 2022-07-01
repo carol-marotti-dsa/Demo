@@ -1,7 +1,8 @@
 <!--https://sfdctree.wordpress.com/2020/10/20/lwc-lightning-data-table-with-pagination-searching-and-sorting/-->
 <template>
     <lightning-card title="Document List Pagination 2">
-        <div class="slds-m-around_medium">
+        <div class="slds-var-m-around_medium">
+           <!-- Not working
             <lightning-input 
                 type="search" 
                 onchange={handleKeyChange} 
@@ -9,19 +10,34 @@
                 label="Search" 
                 value={searchKey}>
             </lightning-input>
-            
+            -->
+           <!-- Overridding onrowselection
             <lightning-datatable 
                 data-id="table" 
                 key-field="Id" 
                 data={data} 
                 columns={columns} 
+                hide-checkbox-column
                 sorted-by={sortedBy}
                 sorted-direction={sortedDirection} 
                 onrowselection ={onRowSelection} 
                 selected-rows={allSelectedRows} 
                 onsort={sortColumns}>
            </lightning-datatable>
-           </br>
+        -->
+           <lightning-datatable 
+                data-id="table" 
+                key-field="Id" 
+                data={data} 
+                columns={columns} 
+                sorted-by={sortedBy}
+                sorted-direction={sortedDirection} 
+                onrowselection ={handleRowSelection} 
+                onsort={sortColumns}
+                onrowaction={handleDocumentSelection}
+                show-row-number-column="true"
+                max-row-selection=1>
+           </lightning-datatable>
 
             <lightning-layout horizontal-align="space">
                 <lightning-layout-item flexibility="auto">
